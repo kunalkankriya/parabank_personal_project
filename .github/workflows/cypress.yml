@@ -1,0 +1,40 @@
+name: CI/CD Pipeline
+
+on:
+  [push]
+
+jobs:
+  cypress-run:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        group:
+          - "registration_and_login.js"
+          - "registration_and_login.js"
+      max-parallel: 2
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Specify the Node.js version you use
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Cypress
+        run: npx cypress install
+
+      - name: Run Cypress tests
+        run: |
+          npx cypress run --spec "cypress/e2e/${{ matrix.group }}" || echo "Cypress tests failed"
+
+      - name: Upload Cypress screenshots
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots/

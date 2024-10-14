@@ -11,6 +11,7 @@ jobs:
         group:
           - "registration.js"
           - "login_logout.js"
+          - "account_overview.js"
       max-parallel: 2
 
     steps:

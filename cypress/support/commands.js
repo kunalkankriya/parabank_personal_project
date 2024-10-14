@@ -24,12 +24,20 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("loginWithCredential", (username, password) => {
+Cypress.Commands.add("loginWithCredential", () => {
+  cy.fixture('credentials').then((loginData) => {
+    cy.visit("/");
+    cy.get('[name="username"]').type(loginData.userName);
+    cy.get('[name="password"]').type(loginData.password);
+    cy.get('[value="Log In"]').click();
+    cy.contains(`Welcome ${loginData.firstName}`)
+    })
 
 });
 
 Cypress.Commands.add("logout", () => {
-    
+    cy.contains('Log Out').click();
+    cy.contains('Customer Login').should('be.visible');
 });
 
 Cypress.Commands.add("clickOptionWithElement", (element) => {

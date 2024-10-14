@@ -40,6 +40,9 @@ describe("user registration", () => {
     const userName = getRandomEmail();
     const password = getRandomPassword();
 
+    const loginData = {firstName, lastName, userName, password};
+    cy.writeFile('cypress/fixtures/credentials.json', loginData);
+    
     // Set Cypress environment variables
     Cypress.env("firstName", firstName);
     Cypress.env("lastName", lastName);
@@ -110,13 +113,5 @@ describe("user registration", () => {
     cy.get('[value="Register"]').click();
     cy.contains(`Welcome ${Cypress.env("userName")}`).should("exist");
     cy.contains(`Your account was created successfully`).should("exist");
-  });
-
-  it("login with credentials", () => {
-    cy.visit("/");
-    cy.get('[name="username"]').type(Cypress.env("userName"));
-    cy.get('[name="password"]').type(Cypress.env("password"));
-    cy.get('[value="Log In"]').click();
-    cy.contains("Accounts Overview").should("exist");
   });
 });

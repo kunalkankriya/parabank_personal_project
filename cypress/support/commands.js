@@ -63,3 +63,7 @@ Cypress.Commands.add("ensureTextPresent", (text) => {
 Cypress.Commands.add("ensureElementEnabled", (locator) => {
   cy.get(locator).should("be.enabled").click();
 });
+
+Cypress.Commands.add("getText", (elem, ele) => {
+  cy.get('tr').eq(elem).find('td').eq(ele).invoke('text').as('acountDetails');
+})

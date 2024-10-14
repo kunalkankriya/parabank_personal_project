@@ -64,6 +64,6 @@ Cypress.Commands.add("ensureElementEnabled", (locator) => {
   cy.get(locator).should("be.enabled").click();
 });
 
-Cypress.Commands.add("getText", (elem, ele) => {
-  cy.get('tr').eq(elem).find('td').eq(ele).invoke('text').as('acountDetails');
+Cypress.Commands.add("getText", (rowIndex1, rowIndex2) => {
+  cy.get('tr').eq(rowIndex1).find('td').eq(rowIndex2).invoke('text').as('acountDetails');
 })

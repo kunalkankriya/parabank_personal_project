@@ -48,8 +48,8 @@ Cypress.Commands.add("clickOptionWithText", (locator) => {
   cy.contains(locator).should("be.visible").click();
 });
 
-Cypress.Commands.add("getElement", (element) => {
-  return cy.get(element);
+Cypress.Commands.add("enterText", (text) => {
+  cy.get('#amount').type(text);
 });
 
 Cypress.Commands.add("ensureElementPresent", (locator) => {
@@ -58,6 +58,10 @@ Cypress.Commands.add("ensureElementPresent", (locator) => {
 
 Cypress.Commands.add("ensureTextPresent", (text) => {
   return cy.contains(text).should("be.visible").should("exist");
+});
+
+Cypress.Commands.add("ensureTextNotPresent", (text) => {
+  cy.contains(text).should("not.exist");
 });
 
 Cypress.Commands.add("ensureElementEnabled", (locator) => {

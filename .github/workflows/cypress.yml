@@ -9,9 +9,8 @@ jobs:
     strategy:
       matrix:
         group:
-          - "registration.js"
-          - "login_logout.js"
-          - "account_overview.js"
+          - "registration.js, login_logout.js"
+          - "account_overview.js, account_transations.js"
       max-parallel: 2
 
     steps:

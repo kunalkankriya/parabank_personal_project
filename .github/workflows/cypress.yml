@@ -22,9 +22,12 @@ jobs:
       - name: Install Cypress
         run: npx cypress install
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests in order
         run: |
-          npx cypress run --spec "cypress/e2e/**/*" || echo "Cypress tests failed"
+          npx cypress run --spec "cypress/e2e/registration.js"
+          npx cypress run --spec "cypress/e2e/login_logout.js"
+          npx cypress run --spec "cypress/e2e/account_overview.js"
+          npx cypress run --spec "cypress/e2e/account_transations.js"
 
       - name: Upload Cypress screenshots
         if: always()

@@ -6,12 +6,6 @@ on:
 jobs:
   cypress-run:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        group:
-          - "registration.js"
-          - "login_logout.js"
-      max-parallel: 2
 
     steps:
       - name: Checkout code
@@ -20,7 +14,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Specify the Node.js version you use
+          node-version: '16'  # Adjust this to the Node.js version you use
 
       - name: Install dependencies
         run: npm install
@@ -28,9 +22,12 @@ jobs:
       - name: Install Cypress
         run: npx cypress install
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests in order
         run: |
-          npx cypress run --spec "cypress/e2e/${{ matrix.group }}" || echo "Cypress tests failed"
+          npx cypress run --spec "cypress/e2e/registration.js"
+          npx cypress run --spec "cypress/e2e/login_logout.js"
+          npx cypress run --spec "cypress/e2e/account_overview.js"
+          npx cypress run --spec "cypress/e2e/account_transations.js"
 
       - name: Upload Cypress screenshots
         if: always()

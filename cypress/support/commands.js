@@ -25,14 +25,11 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("loginWithCredential", () => {
-  cy.fixture('credentials').then((loginData) => {
     cy.visit("/");
-    cy.get('[name="username"]').type(loginData.userName);
-    cy.get('[name="password"]').type(loginData.password);
+    cy.get('[name="username"]').type(Cypress.env('userName'));
+    cy.get('[name="password"]').type(Cypress.env('password'));
     cy.get('[value="Log In"]').click();
-    cy.contains(`Welcome ${loginData.firstName}`)
-    })
-
+    cy.contains('Accounts Overview')
 });
 
 Cypress.Commands.add("logout", () => {

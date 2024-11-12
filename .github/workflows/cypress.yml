@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  cypress-run:
+  smoke-test:
     runs-on: windows-latest
     strategy:
       matrix:
@@ -17,6 +17,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
+
+      - name: Set Cypress Environment Variable
+        run: echo "CYPRESS_INSTALL_BINARY=0" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: npm install

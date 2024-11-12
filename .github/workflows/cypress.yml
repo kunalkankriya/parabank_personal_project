@@ -24,10 +24,9 @@ jobs:
 
       - name: Run Cypress tests in order
         run: |
-          npx cypress run --spec "cypress/e2e/registration.js"
-          npx cypress run --spec "cypress/e2e/login_logout.js"
-          npx cypress run --spec "cypress/e2e/account_overview.js"
-          npx cypress run --spec "cypress/e2e/account_transations.js"
+          npx cypress run --spec "cypress/e2e/auth_test/*.js"
+          npx cypress run --spec "cypress/e2e/accounts/*.js"
+          npx cypress run --spec "cypress/e2e/transactions/*.js"
 
       - name: Upload Cypress screenshots
         if: always()

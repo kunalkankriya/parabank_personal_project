@@ -10,7 +10,7 @@ describe("account transation", () => {
     cy.ensureTextPresent("Transfer Funds").click();
     cy.ensureTextPresent("From account #");
     cy.wait(1000);
-    cy.enterText(amount);
+    cy.enterText('#amount', amount);
     cy.clickOptionWithElement('[type="submit"]');
     cy.ensureTextPresent("Transfer Complete!");
     cy.ensureTextPresent("has been transferre");

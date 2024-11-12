@@ -60,6 +60,18 @@ Cypress.Commands.add("ensureTextPresent", (text) => {
   return cy.contains(text).should("be.visible").should("exist");
 });
 
+Cypress.Commands.add("ensureTextNotPresent", (text) => {
+  return cy.contains(text).should("not.exist");
+});
+
 Cypress.Commands.add("ensureElementEnabled", (locator) => {
   cy.get(locator).should("be.enabled").click();
 });
+
+Cypress.Commands.add("enterText", (locator, value) => {
+  cy.get(locator).should("be.visible").type(value);
+});
+
+Cypress.Commands.add("getText", (rowIndex1, rowIndex2) => {
+  cy.get('tr').eq(rowIndex1).find('td').eq(rowIndex2).invoke('text').as('acountDetails');
+})
